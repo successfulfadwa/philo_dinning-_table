@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/fadwa/Desktop/philo_dinning-_table'
+gcc -Wall -Werror -Wextra -pthread -g -c philo.c -o philo.o
+gcc -Wall -Werror -Wextra -pthread -g -c utils.c -o utils.o
+gcc -Wall -Werror -Wextra -pthread -g -c dinner_utils.c -o dinner_utils.o
+gcc -Wall -Werror -Wextra -pthread -g -c dinner_start.c -o dinner_start.o
+gcc -Wall -Werror -Wextra -pthread -g philo.o utils.o dinner_utils.o dinner_start.o -o philo
+make: Leaving directory '/home/fadwa/Desktop/philo_dinning-_table'
+ 
