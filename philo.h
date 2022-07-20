@@ -1,26 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: igvaz-fe <igvaz-fe@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:54:55 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/03/21 22:58:53 by igvaz-fe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include "libft/libft.h"
+# include "getnext_line/get_next_line.h"
 
-# define MAX_INT	2147483647
-
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
 typedef struct s_setup
 {
 	int				meals;
@@ -38,21 +28,28 @@ typedef struct s_setup
 typedef struct s_philo
 {
 	pthread_t	thread;
-	int			n_meals;
-	int			philo_id;
-	long		last_meal;
-	int			left_fork;
-	int			right_fork;
-	t_setup		*setup_philo;
+	int		philo_id;
+	int		n_meals;
+	long 	last_meal;
+	int	 	left_fork;
+	int		right_fork;
+	t_setup *setup_philo;//setub_own_philo
+	//setup for every philosophers
+
 }	t_philo;
 
+void	validation(int argc, char *argv[]);
+void	init_setup(t_setup *setup,int argc ,char **argv);
 long	get_time(void);
+void	print_event(t_philo *philo , char *action);
+void	start_dinner(t_philo *philo);
+void	eating(t_philo *philo);
+void	*check_rdie(void *ptr);
+int		check_meals(t_philo *philo);
+
+
 int		ft_isdigit(int i);
 long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
-int		check_meals(t_philo *philo);
-void	start_dinner(t_philo *philo);
-void	print_action(t_philo *philo, char *action);
-void	finish_dinner(t_philo *philo, t_setup *setup);
 
 #endif

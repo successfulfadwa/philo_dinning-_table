@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igvaz-fe <igvaz-fe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: faljaoui <faljaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 20:58:45 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/03/21 21:08:14 by igvaz-fe         ###   ########.fr       */
+/*   Created: 2021/11/14 05:29:48 by faljaoui          #+#    #+#             */
+/*   Updated: 2022/01/03 22:46:53 by faljaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include<unistd.h>
 
-void	finish_dinner(t_philo *philo, t_setup *setup)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*str;
+	unsigned char	char1;
 
+	str = (unsigned char *)s;
+	char1 = (unsigned char)c;
 	i = 0;
-	while (i < setup->n_philos)
+	while (i < n)
 	{
-		pthread_mutex_destroy(&setup->forks[i]);
+		if (str[i] == char1)
+			return ((void *)str + i);
 		i++;
-	}
-	pthread_mutex_destroy(&setup->print_locker);
-	free(setup->forks);
-	free(philo);
+	}	
+	return (0);
 }

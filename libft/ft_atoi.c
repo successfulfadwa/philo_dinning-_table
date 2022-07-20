@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igvaz-fe <igvaz-fe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: faljaoui <faljaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 21:53:28 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/03/16 23:02:39 by igvaz-fe         ###   ########.fr       */
+/*   Created: 2021/11/17 05:11:19 by faljaoui          #+#    #+#             */
+/*   Updated: 2022/06/19 05:20:10 by faljaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "libft.h"
 
-int	ft_isdigit(int i)
+static long	is_negative(const char *str)
 {
-	if (i >= 48 && i <= 57)
-		return (1);
-	else
-		return (0);
-}
-
-static int	is_negative(const char *str)
-{
-	int	i;
-	int	sign;
+	long	i;
+	long	sign;
 
 	i = 0;
 	sign = 1;
@@ -40,27 +32,25 @@ static int	is_negative(const char *str)
 
 int	ft_atoi(const char *str)
 {
+	int	res;
 	int	sign;
-	int	nbr;
-	int	i;
 
-	nbr = 0;
-	i = 0;
-	sign = is_negative(str);
-	if (!str)
-		return (0);
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= 48 && str[i] <= 57)
+	res = 0;
+	sign = 1;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sign *= -1 ;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		nbr = (nbr * 10) + (str[i] - '0');
-		i++;
+		res = res * 10 + *str - '0';
+		str++;
 	}
-	return (nbr * sign);
+	return (res * sign);
 }
+
 
 long	ft_atol(const char *str)
 {
